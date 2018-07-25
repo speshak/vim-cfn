@@ -22,3 +22,9 @@ Then run
 vim +PluginInstall +qall
 ```
 
+## Configure
+Add the following to `~/.vim/after/plugin/syntastic.vim`:
+
+```
+let g:syntastic_cloudformation_checkers = ['cfn_lint']
+```
