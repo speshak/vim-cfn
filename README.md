@@ -4,7 +4,7 @@
 
 This is a vim plugin that provides CloudFormation syntax checking/highlighting.
 This requires the [Syntastic](https://github.com/vim-syntastic/syntastic)
-plugin.
+plugin and [cfn-lint](https://github.com/awslabs/cfn-python-lint).
 
 ## Install
 
