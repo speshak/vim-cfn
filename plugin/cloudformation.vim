@@ -1,10 +1,10 @@
 " Vim syntastic plugin helper
 " Language: CloudFormation
 
-if exists("g:loaded_syntastic_cloudformaiton_filetype")
+if exists("g:loaded_syntastic_cloudformation_filetype")
   finish
 endif
-let g:loaded_syntastic_cloudformaiton_filetype = 1
+let g:loaded_syntastic_cloudformation_filetype = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
