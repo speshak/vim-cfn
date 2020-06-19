@@ -1,4 +1,4 @@
-function! DetectCfn(type)
+function! DetectCfn()
     let likely = 0
     let pointsRequired = 10
 
@@ -50,16 +50,20 @@ function! DetectCfn(type)
         \['Resources', 1],
         \['Outputs', 1],
         \]
+    let json_type = 0
     for lineContents in getline(1, line('$'))
         for strPoints in pointMap
             if lineContents =~ strPoints[0]
                 let likely += strPoints[1]
             endif
+            if lineContents =~ "^\s*\{"
+                let json_type = 1
+            endif
             if likely > pointsRequired
-                if a:type =~ "yaml"
-                    set filetype=yaml.cloudformation
-                elseif a:type =~ "json"
+                if json_type == 1
                     set filetype=json.cloudformation
+                else
+                    set filetype=yaml.cloudformation
                 endif
                 return
             endif
@@ -68,7 +72,7 @@ function! DetectCfn(type)
 endfunction
 
 augroup filetypedetect
-    au BufRead,BufNewFile *.yaml,*.yml call DetectCfn('yaml')
-    au BufRead,BufNewFile *.json call DetectCfn('json')
-    au BufNewFile,BufRead *.template setfiletype yaml.cloudformation
+    au BufRead,BufNewFile *.yaml,*.yml call DetectCfn()
+    au BufRead,BufNewFile *.json call DetectCfn()
+    au BufNewFile,BufRead *.template call DetectCfn()
 augroup END
